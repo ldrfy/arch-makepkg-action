@@ -5,23 +5,21 @@ on:
     - cron:  '0 0 * * *'
   push:
     branches: master
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      IMAGE: docker.pkg.github.com/countstarlight/arch-makepkg-action/makepkg
-      DOCKERHUB_IMAGE: countstarlight/makepkg
     steps:
     - name: Checkout repository
       uses: actions/checkout@v1
-    - name: Login docker registry
-      env:
-        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-      run: |
-        docker login -u countstarlight -p $DOCKER_TOKEN
-    - name: Build docker image
-      run: docker build --rm=true -t $DOCKERHUB_IMAGE:latest .
-    - name: Push docker image
-      run: |
-        docker push $DOCKERHUB_IMAGE:latest
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: rustdesk/makepkg:latest
