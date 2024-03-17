@@ -3,6 +3,9 @@ MAINTAINER Vufa <countstarlight@gmail.com>
 
 ENV UGID='2000' UGNAME='build'
 
+RUN pacman -Syy
+RUN pacman -Syu --noconfirm
+
 # Add sudoers
 RUN echo "build ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$UGNAME
 
@@ -41,8 +44,6 @@ RUN \
     tar xf yay-bin.tar.gz && \
     cd yay-bin && makepkg -is --skippgpcheck --noconfirm && cd .. && \
     rm -rf yay-bin && rm yay-bin.tar.gz && \
-    pacman -Syy && \
-    pacman -Syu --noconfirm
 
 # Enable multilib repo
 RUN sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
