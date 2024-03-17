@@ -41,6 +41,8 @@ RUN \
     tar xf yay-bin.tar.gz && \
     cd yay-bin && makepkg -is --skippgpcheck --noconfirm && cd .. && \
     rm -rf yay-bin && rm yay-bin.tar.gz
+    pacman -Syy
+    pacman -Syu --noconfirm
 
 # Enable multilib repo
 RUN sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
