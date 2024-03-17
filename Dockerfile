@@ -40,8 +40,8 @@ RUN \
     curl -O -s https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz && \
     tar xf yay-bin.tar.gz && \
     cd yay-bin && makepkg -is --skippgpcheck --noconfirm && cd .. && \
-    rm -rf yay-bin && rm yay-bin.tar.gz \
-    pacman -Syy \
+    rm -rf yay-bin && rm yay-bin.tar.gz && \
+    pacman -Syy && \
     pacman -Syu --noconfirm
 
 # Enable multilib repo
