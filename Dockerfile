@@ -43,7 +43,7 @@ RUN \
     curl -O -s https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz && \
     tar xf yay-bin.tar.gz && \
     cd yay-bin && makepkg -is --skippgpcheck --noconfirm && cd .. && \
-    rm -rf yay-bin && rm yay-bin.tar.gz && \
+    rm -rf yay-bin && rm yay-bin.tar.gz
 
 # Enable multilib repo
 RUN sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
