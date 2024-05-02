@@ -23,7 +23,7 @@ jobs:
       with:
         push: true
         provenance: false
-        tags: rustdesk/makepkg:latest-amd64
+        tags: rustdesk/makepkg:latest
 
   build-arm64v8:
     runs-on: [self-hosted, Linux, ARM64]
@@ -58,6 +58,6 @@ jobs:
         uses: Noelware/docker-manifest-action@master
         with:
           base-image: rustdesk/makepkg:latest
-          extra-images: rustdesk/makepkg:latest-amd64 #,rustdesk/makepkg:latest-arm64v8
+          extra-images: rustdesk/makepkg:latest-amd64 rustdesk/makepkg:latest-arm64v8
           push: true
 
