@@ -12,13 +12,13 @@ for r in $INPUT_REPOS; do
 done
 
 # update repos
-sudo pacman -Syy
+# sudo pacman -Syy
 
 if [ ! -z "$INPUT_BEFORE" ]; then
     eval $INPUT_BEFORE || exit $?
 fi
 
-sudo pacman -Syu --noconfirm
+# sudo pacman -Syu --noconfirm
 
 for pkg in $INPUT_PACKAGES; do
     yay -S "$pkg" --noconfirm --needed --useask --gpgflags "--keyserver hkp://pool.sks-keyservers.net" || exit $?
