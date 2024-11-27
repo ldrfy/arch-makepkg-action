@@ -51,6 +51,7 @@ RUN sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 # install ldrfy dep
 RUN yay -S \
             unzip \
+            zip \
             make \
             meson \
             appstream-glib \
