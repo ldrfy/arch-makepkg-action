@@ -22,4 +22,4 @@ inputs:
     required: true
 runs:
   using: docker
-  image: docker://rustdesk/makepkg:latest
+  image: docker://ldr/makepkg:latest

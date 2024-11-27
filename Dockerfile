@@ -48,37 +48,20 @@ RUN \
 # Enable multilib repo
 RUN sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
-# install rustdesk dep
+# install ldrfy dep
 RUN yay -S \
-            llvm \
-            clang \
-            libva \
-            libvdpau \
-            rust \
-            gstreamer \
             unzip \
-            git \
-            cmake \
-            gcc \
-            curl \
-            wget \
-            nasm \
-            zip \
             make \
-            pkg-config \
-            clang \
-            gtk3 \
-            xdotool \
-            libxcb \
-            libxfixes \
-            alsa-lib \
-            pipewire \
-            python \
-            ttf-arphic-uming \
-            libappindicator-gtk3 \
-            pam \
-            gst-plugins-base \
-            gst-plugin-pipewire --noconfirm --needed --useask --gpgflags "--keyserver hkp://pool.sks-keyservers.net"
+            meson \
+            appstream-glib \
+            python-requests \
+            python-pillow \
+            python-pyqt6 \
+            qt6-svg \
+            libadwaita \
+            gobject-introspection \
+            python-gobject \
+            python --noconfirm --needed --useask --gpgflags "--keyserver hkp://pool.sks-keyservers.net"
 
 
 COPY entrypoint.sh /entrypoint.sh
