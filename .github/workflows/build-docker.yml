@@ -23,7 +23,7 @@ jobs:
       with:
         push: true
         provenance: false
-        tags: ldr/makepkg:latest
+        tags: ldrfy/makepkg:latest
 
   docker-manifest:
     needs: [build-amd64]
@@ -39,7 +39,7 @@ jobs:
       - name: Create and push manifest (:latest)
         uses: Noelware/docker-manifest-action@master
         with:
-          base-image: ldr/makepkg:latest
-          extra-images: ldr/makepkg:latest-amd64
+          base-image: ldrfy/makepkg:latest
+          extra-images: ldrfy/makepkg:latest-amd64
           push: true
 
