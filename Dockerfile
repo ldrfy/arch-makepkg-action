@@ -11,18 +11,17 @@ RUN echo "build ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$UGNAME
 
 RUN chmod 'u=r,g=r,o=' /etc/sudoers.d/$UGNAME
 
-RUN \
-    # Update
-    pacman-key --init && \
+# Update, install packages, safely remove .pacnew without touching /proc /sys /dev /run
+RUN pacman-key --init && \
     pacman-key --populate archlinux && \
-    pacman -Syu \
-        base-devel \
-        git \
-        reflector \
-        rsync \
-        --noconfirm --need && \
-    # Clean .pacnew files
-    find / -name "*.pacnew" -exec rename .pacnew '' '{}' \;
+    pacman -Syu --noconfirm --needed \
+    base-devel \
+    git \
+    reflector \
+    rsync && \
+    # Safely remove .pacnew files while pruning pseudo-filesystems and suppressing harmless errors
+    find / \( -path /proc -o -path /sys -o -path /dev -o -path /run \) -prune -o -name '*.pacnew' -print0 2>/dev/null | \
+    xargs -0 -r bash -c 'for f; do mv -- "$f" "${f%.pacnew}"; done' sh
 
 # Setup build user/group
 RUN \
